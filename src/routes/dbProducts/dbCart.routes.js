@@ -88,7 +88,7 @@ router.delete('/deleteAllProducts/:cid', async (req, res) => {
     }
 })
 
-router.delete('/deleteOneProducts/:cid/products/:pid', async (req, res) => {
+router.delete('/deleteOneProduct/:cid/products/:pid', async (req, res) => {
     try {
         let cid = req.params.cid
         let pid = req.params.pid

@@ -33,7 +33,6 @@ class CartManager{
         }
     }
 
-
     async getCartsById(cid){
         try {
             let findingCarts = await Cart.findOne({_id : cid})
@@ -47,7 +46,6 @@ class CartManager{
             return false
         }
     }
-
 
     async addingProductsToCart(cid, pid){
         try {
