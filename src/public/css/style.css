@@ -1,46 +1,66 @@
-body{
+body {
     /* background-image: url('https://i.pinimg.com/564x/4b/7b/13/4b7b13fa2e779fd0e8b4f833b988ceff.jpg'); */
     background-color: rgb(192, 100, 100);
 }
 
-.header__title{
+.header__title {
     background-color: rgb(255, 255, 255);
 }
 
-.header__h1{
+.header__h1 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    background-color: black ;
+    background-color: black;
     border-radius: 0.3rem;
     color: white;
 }
 
-.header__btn{
-    border-radius: 0.3rem ;
+.header__btn {
+    border-radius: 0.3rem;
     border: 1px black solid;
     color: antiquewhite;
     background-color: black;
 }
-.color__white{
+
+.color__white {
     color: rgb(255, 255, 255);
 }
 
-.img__verduras{
+.img__verduras {
     width: 60%;
     border-radius: 0.5rem;
 }
 
-.footer{
+.footer {
     background-color: rgb(235, 235, 235);
 }
 
 
 /* Chat */
 
-.input__chat{
+.input__chat {
     border-radius: 0.4rem;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.bgCwhite{
+.bgCwhite {
     background-color: white;
+}
+
+/* Estilo para el contenedor del chat */
+/* Estilo para la lista de mensajes */
+.message-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    /* Si hay muchos mensajes, aparecerá la barra de desplazamiento vertical */
+}
+
+/* Estilo para el contenedor que envuelve la lista de mensajes */
+#chat {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    height: 400px;
+    /* Altura inicial del contenedor (puedes ajustar este valor) */
 }

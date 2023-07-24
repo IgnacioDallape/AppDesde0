@@ -24,6 +24,14 @@ socket.on('mensajes', (data) => {
     document.getElementById('chat').innerHTML = chat
 })
 
+//falta adaptar la barra lateral
+
+function deleteAllMessages(){
+    socket.emit('deleteMessages')
+}
+
+document.getElementById('deleteMessagesBtn').addEventListener('click', deleteAllMessages)
+
 
 const oneMessage = () => {
     let allMessage = {

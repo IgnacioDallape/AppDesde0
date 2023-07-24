@@ -30,6 +30,19 @@ class ChatManager {
             return false
         }
     }
+
+    async deleteMessages(){
+        try {
+            let deletingMessages = await Chat.deleteMany({})
+            if(!deletingMessages){
+                return false
+            }
+            return deletingMessages
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+    }
 }
 
 export { ChatManager }

@@ -1,0 +1,37 @@
+<div>
+    <header class="header__title d-flex justify-content-center align-items-center flex-column pt-3">
+        <h1 class="header__h1 p-1">Login</h1>
+        <div class="pb-2">
+            <a href="/home"><button class="header__btn">Home</button></a>
+            <a href="/products"><button class="header__btn">Productos</button></a>
+            <a href="/chat"><button class="header__btn">Chat</button></a>
+        </div>
+    </header>
+
+
+    <main class="d-flex justify-content-center align-items-center pb-4">
+        <form action="/auth/login" method="post">
+            <div class="pt-2">
+                <input type="email" name="username" id="username" placeholder="ingrese su email" autofocus required>
+            </div>
+            <div class="pt-2">
+                <input type="password" name="password" id="password" placeholder="ingrese su contraseña" required>
+            </div>
+            <div class="pt-2">
+                <button type="submit" class="btn btn-primary"> Ingresar </button>
+            </div>
+            <div class="pt-2">
+                <a href="/register"><button type="button"  class="btn btn-primary"> Registrarme</button></a>
+            </div>
+        </form>
+    </main>
+
+
+    <footer>
+
+
+    </footer>
+
+
+
+</div>

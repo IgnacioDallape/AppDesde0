@@ -7,6 +7,7 @@ const PM = new ProductManager()
 router.get('/', async (req,res) => {
     try{
         let a = req.session
+        console.log(a)
         let {page, limit} = req.query
         let products = await PM.getProducts(page,limit)
         if(!products){

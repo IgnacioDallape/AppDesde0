@@ -4,6 +4,14 @@ import { CartManager } from "./CartManager.js";
 const newCM = new CartManager()
 const router = new Router()
 
+
+// router.param('word', (req,res,next,word) => {
+//     req.word = {
+//         palabra: 'hola soy la palabra: ' + word
+//     }
+//     next()
+// })
+
 router.get('/addCart', async (req, res) => {
     try {
         let newCart = await newCM.addCart()
@@ -105,5 +113,10 @@ router.delete('/deleteOneProduct/:cid/products/:pid', async (req, res) => {
         res.status(500).send(error)
     }
 })
+
+
+// router.get('*', (req, res) => {
+//     res.status(404).render('error', {})
+// })
 
 export { router }
