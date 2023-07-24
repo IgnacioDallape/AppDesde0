@@ -2,22 +2,41 @@
     <header class="header__title d-flex justify-content-center align-items-center flex-column pt-3">
         <h1 class="header__h1 p-1">Productos</h1>
         <div class="pb-2">
-            <a href="/home" ><button class="header__btn">Ingreso</button></a>
-            <a href="#" ><button class="header__btn">Productos</button></a>
-            <a href="" ><button class="header__btn">Ayuda</button></a>
+            <a href="/home"><button class="header__btn">Home</button></a>
+            <a href="#"><button class="header__btn">Productos</button></a>
+            <a href="/chat"><button class="header__btn">Chat</button></a>
+
         </div>
     </header>
     <main>
         <h1 class="d-flex justify-content-center align-items-center flex-column pt-3 header__h1"> Productos </h1>
         <div class="d-flex justify-content-center align-items-center flex-column pt-3">
             <div id="products">
-                
+                {{#each productData}}
+                <li class="color__white pb-3">Producto: {{name}}, Precio: {{price}}</li>
+                {{/each}}
             </div>
+            <div class="d-flex justify-content-center align-items-center ">
+                {{#if paginationData.hasPrevPage}}
+                <a href="/products/?page={{paginationData.prevPage}}" class="btn p-2">⬅{{paginationData.prevPage}}</a>
+                {{/if}}
+                <a href="#" class="btn p-2">{{paginationData.page}} </a>
+                {{#if paginationData.hasNextPage}}
+                <a href="/products/?page={{paginationData.nextPage}}" class="btn p-2">{{paginationData.nextPage}}➡</a>
+                {{/if}}
+            </div>
+            <div class="d-flex justify-content-center pt-2 p-3">
+                {{#each pagination}}
+                <a href="{{this.href}}" class="btn "> {{this.label}} </a>
+                {{/each}}
+            </div>
+
+
         </div>
     </main>
     <footer class="d-flex justify-content-center align-items-center flex-column pt-3 footer pb-3">
         <div class="color__white">contacto : 12385124</div>
-        <div class="color__white">email : ashdhj@mail.com</div>
+        <div class="color__white">email : nacho@mail.com</div>
         <div class="color__white">Te esperamos!</div>
     </footer>
 </div>

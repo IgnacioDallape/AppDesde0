@@ -21,8 +21,7 @@ class ProductManager {
 
     async getProducts(page, limit) {
         try {
-            let allProd = await Products.paginate({}, { page: page || 1, limit: limit || 3 })
-            console.log(allProd)
+            let allProd = await Products.paginate({}, { page: page || 1, limit: limit || 5 })
             if (!allProd) {
                 console.log('error en get prod paginate')
                 return false

@@ -1,5 +1,6 @@
 body{
-    background-image: url('https://i.pinimg.com/564x/4b/7b/13/4b7b13fa2e779fd0e8b4f833b988ceff.jpg');
+    /* background-image: url('https://i.pinimg.com/564x/4b/7b/13/4b7b13fa2e779fd0e8b4f833b988ceff.jpg'); */
+    background-color: rgb(192, 100, 100);
 }
 
 .header__title{
@@ -20,7 +21,7 @@ body{
     background-color: black;
 }
 .color__white{
-    color: rgb(63, 58, 58);
+    color: rgb(255, 255, 255);
 }
 
 .img__verduras{

@@ -23,13 +23,13 @@ app.use(express.static(join(dirname(__filename), 'public')));
 import { router as homeRouter } from './routes/home.view.js'
 import { router as productsRouter } from './routes/dbProducts/dbProducts.routes.js';
 import { router as cartsRouter } from './routes/dbProducts/dbCart.routes.js'
-import {router as productsRenderRouter} from './routes/products.view.js'
-import {router as chatRenderRouter} from './routes/chat/chat.view.js'
+import { router as productsRenderRouter } from './routes/products.view.js'
+import { router as chatRenderRouter } from './routes/chat/chat.view.js'
 
 app.use('/home', homeRouter)
-app.use('/products', productsRouter)
+app.use('/productos', productsRouter)
 app.use('/carts', cartsRouter)
-app.use('/productos', productsRenderRouter)
+app.use('/products', productsRenderRouter)
 app.use('/chat', chatRenderRouter)
 
 //handlebars
@@ -49,19 +49,28 @@ const io = new Server(server)
 import { ChatManager } from './routes/chat/ChatManager.js';
 const CM = new ChatManager()
 
-let messages = []
 
 io.on('connection', async (socket) => {
     try {
+        try {
+            let gettingChat = await CM.getMessage()
+            if (!gettingChat) {
+                console.log('error en index getting chat addMessage')
+                return false
+            }
+            io.sockets.emit('mensajes', gettingChat)
+        } catch (error) {
+            console.log(err)
+        }
         socket.on('chat', async (data) => {
             try {
                 let chat = await CM.addMessage(data)
-                if(!chat){
+                if (!chat) {
                     console.log('error en index chat addMessage')
                     return false
                 }
                 let gettingChat = await CM.getMessage()
-                if(!gettingChat){
+                if (!gettingChat) {
                     console.log('error en index getting chat addMessage')
                     return false
                 }
@@ -71,14 +80,12 @@ io.on('connection', async (socket) => {
                 console.log(err)
                 return false
             }
-            
-
         })
     } catch (error) {
         console.log(err)
     }
 })
-                //IMPORTANTE ESTO, CORRER DESDE SERVER PARA SOCKET!
+//IMPORTANTE ESTO, CORRER DESDE SERVER PARA SOCKET!
 server.listen(PORT, () => {
     console.log('corriendo en el puerto: ', PORT)
     DB.connect()
