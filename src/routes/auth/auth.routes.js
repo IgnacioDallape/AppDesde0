@@ -3,6 +3,7 @@ const router = new Router()
 
 let users = []
 
+
 router.post('/register', (req,res) => {
     try {
         let newUser = req.body;
