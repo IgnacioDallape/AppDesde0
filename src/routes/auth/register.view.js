@@ -2,7 +2,7 @@ import { Router } from 'express'
 const router = new Router()
 
 
-router.get('/', (req,res) => {
+router.get('/register', (req,res) => {
     try{
         res.render('register', {})
     } catch (err) {

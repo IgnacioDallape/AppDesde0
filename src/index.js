@@ -5,6 +5,9 @@ import { dirname, join } from 'path';
 import { connection as DB } from './dao/db/db.js'
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import MongoStore from 'connect-mongo';
+
+
 
 //consts
 
@@ -20,11 +23,35 @@ app.use(cookieParser('secretoCookie'))  //aca le ponemos el secreto
 
 //session
 
+import dotenv from 'dotenv'
+dotenv.config()
+let password = process.env.PASSWORD
+
 app.use(session({
+    store: MongoStore.create({  //esto me va a crear una coleccion llamada sessions, sin que yo le diga nada
+        mongoUrl: `mongodb+srv://appdesde0:${password}@appdesde0.h4mpajf.mongodb.net/appdesde0`  
+    }),
     secret: 'sessionSecret',
     resave: true,
     saveUninitialized: true
 }))
+
+app.get('/createSession', (req,res) => {
+    req.session.name = 'nacho'
+    res.send('session creada')
+})
+app.get('/getSession', (req,res) => {
+    res.send(req.session)
+})
+app.get('/destroySession', (req,res) => {
+    req.session.destroy(err => {
+        if(err) {
+            res.send(err)
+            return false
+        }
+        res.send('sesion eliminada')
+    })
+})
 
 
 // static
@@ -39,9 +66,10 @@ import { router as cartsRouter } from './routes/dbProducts/dbCart.routes.js'
 import { router as productsRenderRouter } from './routes/products.view.js'
 import { router as chatRenderRouter } from './routes/chat/chat.view.js'
 import { router as errorRouter } from './routes/error.view.js';
-import { router as loginRouter } from './routes/login.view.js';
-import { router as registerRouter } from './routes/register.view.js';
-
+import { router as loginRouter } from './routes/auth/login.view.js';
+import { router as registerRouter } from './routes/auth/register.view.js';
+import { router as profileRouter } from './routes/profile.views.js';
+import { router as authRouter } from './routes/auth/auth.routes.js';
 
 app.use('/home', homeRouter)
 app.use('/productos', productsRouter)
@@ -49,8 +77,10 @@ app.use('/carts', cartsRouter)
 app.use('/products', productsRenderRouter)
 app.use('/chat', chatRenderRouter)
 app.use('/error', errorRouter)
-app.use('/login', loginRouter)
-app.use('/register', registerRouter)
+app.use('/view', loginRouter)
+app.use('/view', registerRouter)
+app.use('/view', profileRouter)
+app.use('/auth', authRouter)
 
 
 //handlebars
@@ -124,49 +154,7 @@ io.on('connection', async (socket) => {
     }
 })
 
-//session prueba
-
-// function auth(req,res,next){
-// if(!req.session.admin || !req.session.user){
-//     res.status(401).send('primero debe loguarse como admin')
-//     return false
-// }
-// next()
-// }
-
-// app.get('/log', (req,res) => {
-//     let {username, password} = req.query
-//     req.session.username = username;
-//     req.session.password = password;
-//     console.log(req.session.username)
-//     console.log(req.session.password)
-//     if(username !== 'nacho' || password != 1234){
-//         console.log('error al loguear')
-//         res.status(400).send('error al loguarse')
-//         return false
-//     }
-//     req.session.user = username;
-//     req.session.admin = true
-//     res.send('logueado!')
-
-// })
-
-// app.get('/private', auth, (req,res) => {
-//     res.send('te logueaste al privado!')
-// })
-
-// app.get('/logout', (req,res) => {
-//     req.session.destroy(err => {
-//         if(err){
-//             console.log(err)
-//             res.status(500).send('logout erroneo')
-//         }
-//         res.send('logout ok')
-//     })
-// })
-
-
-//IMPORTANTE ESTO, CORRER DESDE SERVER PARA SOCKET!
+//IMPORTANTE ESTO, CORRER DESDE SERVER PARA SOCKET! USAR SERVER
 server.listen(PORT, async () => {
     console.log('corriendo en el puerto: ', PORT)
     await DB.connect()

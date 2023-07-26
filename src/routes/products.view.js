@@ -6,8 +6,8 @@ const PM = new ProductManager()
 
 router.get('/', async (req,res) => {
     try{
-        let a = req.session
-        console.log(a)
+        // let a = req.session
+        // console.log(a)
         let {page, limit} = req.query
         let products = await PM.getProducts(page,limit)
         if(!products){
@@ -15,7 +15,6 @@ router.get('/', async (req,res) => {
             res.status(500).send('error obteniendo los productos')
             return false
         }
-        
         let productData = products.docs.map( e => {
             return { name: e.name, price: e.price}
         })
