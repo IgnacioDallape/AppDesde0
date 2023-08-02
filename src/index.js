@@ -29,7 +29,9 @@ let password = process.env.PASSWORD
 
 app.use(session({
     store: MongoStore.create({  //esto me va a crear una coleccion llamada sessions, sin que yo le diga nada
-        mongoUrl: `mongodb+srv://appdesde0:${password}@appdesde0.h4mpajf.mongodb.net/appdesde0`  
+        mongoUrl: `mongodb+srv://appdesde0:${password}@appdesde0.h4mpajf.mongodb.net/appdesde0`,
+        mongoOptions: {useNewUrlParser:true, useUnifiedTopology: true},
+        ttl: 15
     }),
     secret: 'sessionSecret',
     resave: true,

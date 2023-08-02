@@ -1,21 +1,17 @@
 import { Router } from 'express'
 const router = new Router()
+import { Users } from '../../dao/models/Users.model.js';
+import { UsersManager } from '../dbProducts/UsersManager.js';
+const UM = new UsersManager()
 
-let users = []
-
-
-router.post('/register', (req,res) => {
+router.post('/register', async (req,res) => {
     try {
-        let newUser = req.body;
-        let finding = users.find( e => e.email == newUser.email)
-        if(finding){
-            console.log('usuario ya registrado')
-            res.send('usuario ya registrado')
-            return false
-        }        
-        newUser.id = Math.random()
-        users.push(newUser)
-        res.redirect('/view/login')
+        let {firstName, lastName, email, password} = req.body;
+        let a = await UM.addUser(firstName, lastName, email, password)
+        console.log(a)
+        
+
+        res.redirect('/view/register')
     } catch (error) {
         console.log(error)
         res.redirect('/error')
@@ -39,6 +35,7 @@ router.post('/login', (req,res) => {
         if(loginUser.email == 'nachodallape2@gmail.com'){
             req.session.admin = true
         }
+        console.log(req.session.admin)
         res.redirect('/view/profile')
     } catch (error) {
         console.log(error)
