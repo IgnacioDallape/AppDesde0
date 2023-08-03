@@ -4,7 +4,8 @@ const router = new Router();
 function auth(req, res, next) {
   try {
     let session = req.session;
-    if (!session.name) {
+    console.log(session, 'profile')
+    if (!session.passport) {
       res.send("inicia sesion primero");
       return false;
     }

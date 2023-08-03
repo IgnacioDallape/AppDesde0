@@ -15,26 +15,14 @@ router.post('/register', passport.authenticate('register', {failureRedirect:'/au
     }
 })
 
-router.post('/login', async (req,res) => {
+router.post('/login', passport.authenticate('login', {failureRedirect:'/view/login'}), async (req,res) => {
     try {
-        let loginUser = req.body
-        console.log(loginUser)
-        let login = await UM.loginUser(loginUser, loginUser.password)
-        if(!login){
-            res.status(401).redirect('/view/login')
-            return false
-        }
-        req.session.name = login.name
-        req.session.email = login.email
-        req.session.admin = false
-        if(req.session.email == 'nacho.dallape@gmail.com'){
-            req.session.admin = true
-        }
-        console.log(req.session)
+        console.log('usuario logueado')
         res.redirect('/view/profile')
+        return
     } catch (error) {
         console.log(error)
-        res.redirect('/error')
+        return
     }
 })
 
