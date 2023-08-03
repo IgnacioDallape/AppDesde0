@@ -15,7 +15,7 @@ router.post('/register', async (req,res) => {
         }
         let adding = await UM.addUser(firstName, lastName, email, password)
         if(!adding){
-            res.send('error al registrar ususario, asegurese de completar bien los datos')
+            res.status(401).send('error al registrar ususario, asegurese de completar bien los datos')
             return false
         }
         res.redirect('/view/login')
@@ -31,7 +31,7 @@ router.post('/login', async (req,res) => {
         console.log(loginUser)
         let login = await UM.loginUser(loginUser, loginUser.password)
         if(!login){
-            res.redirect('/view/login')
+            res.status(401).redirect('/view/login')
             return false
         }
         req.session.name = login.name
