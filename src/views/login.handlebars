@@ -9,19 +9,20 @@
     </header>
 
 
-    <main class="d-flex justify-content-center align-items-center pb-4">
-        <form action="/auth/login" method="post">
+    <main class="d-flex justify-content-center align-items-center pt-5">
+        <form action="/auth/login" method="post" class="loginAndRegister p-4">
+        <h5 class="d-flex justify-content-center align-items-center">LOGIN</h5>
             <div class="pt-2">
-                <input type="email" name="email" id="email" placeholder="ingrese su email" autofocus required>
+                <input type="email" name="email" id="email" placeholder="ingrese su email" autofocus required class="input_loginRegister">
             </div>
             <div class="pt-2">
-                <input type="password" name="password" id="password" placeholder="ingrese su contraseña" required>
+                <input type="password" name="password" id="password" placeholder="ingrese su contraseña" required class="input_loginRegister">
             </div>
-            <div class="pt-2">
-                <button type="submit" class="btn btn-primary"> Ingresar </button>
+            <div class="pt-2 d-flex justify-content-center align-items-center">
+                <button type="submit" class="btn botoneras btn-dark"> Ingresar </button>
             </div>
-            <div class="pt-2">
-                <a href="/view/register"><button type="button"  class="btn btn-primary"> Registrarme</button></a>
+            <div class="pt-2 d-flex justify-content-center align-items-center">
+                <a href="/view/register"><button type="button"  class="btn botoneras btn-dark"> Registrarme</button></a>
             </div>
         </form>
     </main>

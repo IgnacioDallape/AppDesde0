@@ -1,6 +1,6 @@
 body {
     /* background-image: url('https://i.pinimg.com/564x/4b/7b/13/4b7b13fa2e779fd0e8b4f833b988ceff.jpg'); */
-    background-color: rgb(192, 100, 100);
+    background-color: rgb(36, 32, 32);
 }
 
 .header__title {
@@ -63,4 +63,38 @@ body {
     border-radius: 5px;
     height: 400px;
     /* Altura inicial del contenedor (puedes ajustar este valor) */
+}
+
+.loginAndRegister{
+    background-color: #d5cfcf;
+    border-radius: 1rem;
+    border: 1px black solid;
+}
+
+.botoneras{
+    color: white;
+    transition: transform 0.3s ease-out; 
+}
+
+.botoneras:hover{
+    transform: scale(1.1) ;
+}
+
+.input_loginRegister{
+    border-radius: 0.4rem;
+    color: white;
+    background-color: black;
+}
+
+.input_loginRegister::placeholder{
+    color: rgb(255, 255, 255);
+}
+
+.background__white{
+    background-color: white;
+}
+
+.header__register{
+    border-radius: 0.5rem;
+    background-color: #d5cfcf;
 }

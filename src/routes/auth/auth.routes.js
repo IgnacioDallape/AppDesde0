@@ -7,35 +7,40 @@ const UM = new UsersManager()
 router.post('/register', async (req,res) => {
     try {
         let {firstName, lastName, email, password} = req.body;
-        let a = await UM.addUser(firstName, lastName, email, password)
-        console.log(a)
-        
-
-        res.redirect('/view/register')
+        let finding = await UM.findUser(email)
+        console.log(finding)
+        if(!finding){
+            res.status(401).send('email ya registrado')
+            return false
+        }
+        let adding = await UM.addUser(firstName, lastName, email, password)
+        if(!adding){
+            res.send('error al registrar ususario, asegurese de completar bien los datos')
+            return false
+        }
+        res.redirect('/view/login')
     } catch (error) {
         console.log(error)
         res.redirect('/error')
     }
 })
 
-router.post('/login', (req,res) => {
+router.post('/login', async (req,res) => {
     try {
         let loginUser = req.body
-        let finding = users.find(e => {
-            return loginUser.email == e.email  && loginUser.password ==  e.password
-        })
-        if(!finding){
-            console.log('usuario no existente')
+        console.log(loginUser)
+        let login = await UM.loginUser(loginUser, loginUser.password)
+        if(!login){
             res.redirect('/view/login')
             return false
         }
-        req.session.user = loginUser.email 
-        req.session.password = loginUser.password
+        req.session.name = login.name
+        req.session.email = login.email
         req.session.admin = false
-        if(loginUser.email == 'nachodallape2@gmail.com'){
+        if(req.session.email == 'nacho.dallape@gmail.com'){
             req.session.admin = true
         }
-        console.log(req.session.admin)
+        console.log(req.session)
         res.redirect('/view/profile')
     } catch (error) {
         console.log(error)

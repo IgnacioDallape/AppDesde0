@@ -4,8 +4,7 @@ const router = new Router();
 function auth(req, res, next) {
   try {
     let session = req.session;
-    console.log(session.user);
-    if (!session.user) {
+    if (!session.name) {
       res.send("inicia sesion primero");
       return false;
     }
@@ -18,7 +17,8 @@ function auth(req, res, next) {
 
 router.get("/profile", auth, (req, res) => {
   try {
-    res.render("profile", {});
+    let nombre = req.session.name
+    res.render("profile", {name: nombre});
   } catch (err) {
     console.log(err);
     res.render(err);
