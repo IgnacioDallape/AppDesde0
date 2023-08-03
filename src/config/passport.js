@@ -16,7 +16,7 @@ const initializatePassport = () => {
                     console.log('usuario existente')
                     return done(null, false)
                 }
-                let newUser = {
+                let newUser = { 
                     name: data.firstName,
                     lastname: data.lastName,
                     email: data.email,
