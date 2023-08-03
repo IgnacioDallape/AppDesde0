@@ -2,22 +2,12 @@ import { Router } from 'express'
 const router = new Router()
 import { Users } from '../../dao/models/Users.model.js';
 import { UsersManager } from '../dbProducts/UsersManager.js';
+import passport from 'passport';
 const UM = new UsersManager()
 
-router.post('/register', async (req,res) => {
+router.post('/register', passport.authenticate('register', {failureRedirect:'/auth/failedRegister'}), async (req,res) => {
     try {
-        let {firstName, lastName, email, password} = req.body;
-        let finding = await UM.findUser(email)
-        console.log(finding)
-        if(!finding){
-            res.status(401).send('email ya registrado')
-            return false
-        }
-        let adding = await UM.addUser(firstName, lastName, email, password)
-        if(!adding){
-            res.status(401).send('error al registrar ususario, asegurese de completar bien los datos')
-            return false
-        }
+        console.log('usuario registrado')
         res.redirect('/view/login')
     } catch (error) {
         console.log(error)
@@ -48,6 +38,14 @@ router.post('/login', async (req,res) => {
     }
 })
 
+router.get('/failedRegister', (req,res) => {
+    try {
+        res.send('error al registrar el usuario')
+    } catch (error) {
+        console.log(error)
+        res.redirect('/error')
+    }
+})
 
 router.get('/users', (req,res) => {
     try {

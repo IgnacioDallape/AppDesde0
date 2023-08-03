@@ -6,7 +6,8 @@ import { connection as DB } from './dao/db/db.js'
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
-
+import passport from 'passport';
+import { initializatePassport } from './config/passport.js';
 
 
 //consts
@@ -16,12 +17,9 @@ const app = express()
 const PORT = 8080
 
 
-//configuraciones
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(cookieParser('secretoCookie'))  //aca le ponemos el secreto
 
-//session
+
+//session  => se pone antes de passport
 
 import dotenv from 'dotenv'
 dotenv.config()
@@ -37,6 +35,26 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }))
+
+//passport
+
+
+initializatePassport() //antes de inicializar passport la ejecuto
+
+app.use(passport.initialize())
+app.use(passport.session())
+//configuraciones
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser('secretoCookie'))  //aca le ponemos el secreto
+
+
+
+
+
+
+
+
 
 app.get('/createSession', (req,res) => {
     req.session.name = 'nacho'
