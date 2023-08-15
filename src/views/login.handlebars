@@ -11,18 +11,33 @@
 
     <main class="d-flex justify-content-center align-items-center pt-5">
         <form action="/auth/login" method="post" class="loginAndRegister p-4">
-        <h5 class="d-flex justify-content-center align-items-center">LOGIN</h5>
+            <h5 class="d-flex justify-content-center align-items-center">LOGIN</h5>
             <div class="pt-2">
-                <input type="email" name="email" id="email" placeholder="ingrese su email" autofocus required class="input_loginRegister">
+                <input type="email" name="email" id="email" placeholder="ingrese su email" autofocus required
+                    class="input_loginRegister">
             </div>
             <div class="pt-2">
-                <input type="password" name="password" id="password" placeholder="ingrese su contraseña" required class="input_loginRegister">
+                <input type="password" name="password" id="password" placeholder="ingrese su contraseña" required
+                    class="input_loginRegister">
             </div>
             <div class="pt-2 d-flex justify-content-center align-items-center">
                 <button type="submit" class="btn botoneras btn-dark"> Ingresar </button>
             </div>
             <div class="pt-2 d-flex justify-content-center align-items-center">
-                <a href="/view/register"><button type="button"  class="btn botoneras btn-dark"> Registrarme</button></a>
+                <a href="/view/register"><button type="button" class="btn botoneras btn-dark"> Registrarme</button></a>
+            </div>
+
+            <div class="p-2 d-flex justify-content-center align-items-center">
+                <a href="/auth/github" class=" main__button"><button type="button"
+                        class="btn  btn-login main__button botoneras bg-dark">
+                        <img src="https://i.pinimg.com/564x/63/de/54/63de5479e8eb4676570c49e2579cab01.jpg"
+                            class="img__github botoneras borderRadius" alt=""> Ingresa con Github</button></a>
+            </div>
+            <div class="p-2 d-flex justify-content-center align-items-center">
+                <a href="/auth/google" class=" main__button"><button type="button"
+                        class="btn  btn-login main__button botoneras bg-dark">
+                        <img src="https://webimages.mongodb.com/_com_assets/cms/kr6fvgdym4qzsgqo3-Google%20Icon.svg?auto=format%252Ccompress"
+                            class="img__google botoneras" alt=""> Ingresa con Google</button></a>
             </div>
         </form>
     </main>

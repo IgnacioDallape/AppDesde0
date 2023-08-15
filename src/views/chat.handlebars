@@ -5,18 +5,18 @@
             <a href="/home"><button class="header__btn">Home</button></a>
             <a href="/products"><button class="header__btn">Productos</button></a>
             <a href=""><button class="header__btn">Chat</button></a>
+            <a href="/view/login"><button class="header__btn">Login</button></a>
         </div>
-        <a href="/view/login"><button class="header__btn">Login</button></a>
 
     </header>
-<main class="pt-3">
-    <div id="chat" class="bgCwhite container">
-        <ul id="messageList" class="message-list "></ul> <!-- Lista de mensajes con nueva clase "message-list" -->
-        <div id="noMessagesText" class="bgCwhite container">No hay mensajes disponibles</div>
-    </div>
-    {{!-- hacemos que cada vez que se envíe un mensaje con onsubmit, se ejecute la función de JS "oneMessage" --}}
-    <form onsubmit="return oneMessage()" class="d-flex justify-content-center align-items-center flex-column pt-3">
-        <!-- ... Resto del formulario ... -->
+    <main class="pt-3">
+        <div id="chat" class="bgCwhite container">
+            <ul id="messageList" class="message-list "></ul> <!-- Lista de mensajes con nueva clase "message-list" -->
+            <div id="noMessagesText" class="bgCwhite container">No hay mensajes disponibles</div>
+        </div>
+        {{!-- hacemos que cada vez que se envíe un mensaje con onsubmit, se ejecute la función de JS "oneMessage" --}}
+        <form onsubmit="return oneMessage()" class="d-flex justify-content-center align-items-center flex-column pt-3">
+            <!-- ... Resto del formulario ... -->
             <div class="pt-2">
                 <input type="text" name="name" id="name" placeholder="Ingrese su nombre" required class="input__chat">
             </div>
@@ -31,8 +31,8 @@
                 <button type="button" id="deleteMessagesBtn" class="input__chat">Eliminar Todos los Mensajes</button>
             </div>
 
-    </form>
-</main>
+        </form>
+    </main>
 
     <footer class="d-flex justify-content-center align-items-center flex-column pt-3 footer pb-3">
         <div class="color__white">contacto : 12385124</div>

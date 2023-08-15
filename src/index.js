@@ -8,6 +8,8 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import passport from 'passport';
 import { initializatePassport } from './config/passport.js';
+import { passport as github } from './config/github.js';
+import { passport as google } from './config/google.js';
 
 
 //consts
@@ -37,6 +39,7 @@ app.use(session({
 }))
 
 //passport
+
 
 
 initializatePassport() //antes de inicializar passport la ejecuto

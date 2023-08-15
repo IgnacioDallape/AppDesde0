@@ -78,6 +78,8 @@ body {
 
 .botoneras:hover{
     transform: scale(1.1) ;
+    color: white;
+
 }
 
 .input_loginRegister{
@@ -97,4 +99,18 @@ body {
 .header__register{
     border-radius: 0.5rem;
     background-color: #d5cfcf;
+}
+
+.img__github{
+    width: 2.5rem;
+}
+.googleButton{
+    color: white;
+}
+.img__google{
+    width: 2.5rem;
+    padding-right: 1rem ;
+}
+.borderRadius{
+    border-radius: 1rem;
 }

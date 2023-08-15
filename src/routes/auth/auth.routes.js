@@ -5,7 +5,7 @@ import { UsersManager } from '../dbProducts/UsersManager.js';
 import passport from 'passport';
 const UM = new UsersManager()
 
-router.post('/register', passport.authenticate('register', {failureRedirect:'/auth/failedRegister'}), async (req,res) => {
+router.post('/register', passport.authenticate('register', { failureRedirect: '/auth/failedRegister' }), async (req, res) => {
     try {
         console.log('usuario registrado')
         res.redirect('/view/login')
@@ -15,7 +15,7 @@ router.post('/register', passport.authenticate('register', {failureRedirect:'/au
     }
 })
 
-router.post('/login', passport.authenticate('login', {failureRedirect:'/view/login'}), async (req,res) => {
+router.post('/login', passport.authenticate('login', { failureRedirect: '/view/login' }), async (req, res) => {
     try {
         console.log('usuario logueado')
         res.redirect('/view/profile')
@@ -26,7 +26,7 @@ router.post('/login', passport.authenticate('login', {failureRedirect:'/view/log
     }
 })
 
-router.get('/failedRegister', (req,res) => {
+router.get('/failedRegister', (req, res) => {
     try {
         res.send('error al registrar el usuario')
     } catch (error) {
@@ -35,7 +35,8 @@ router.get('/failedRegister', (req,res) => {
     }
 })
 
-router.get('/users', (req,res) => {
+
+router.get('/users', (req, res) => {
     try {
         res.send(users)
     } catch (error) {
@@ -44,14 +45,15 @@ router.get('/users', (req,res) => {
     }
 })
 
-router.get('/logout', (req,res) => {
+router.get('/logout', (req, res) => {
     try {
-        req.session.destroy( (err) => {
-            if(err){
+        req.session.destroy((err) => {
+            if (err) {
                 console.log(err)
                 res.status(500).send('no se pudo eliminar la session')
             }
-        res.redirect('/view/login')
+            console.log('logout exitoso')
+            res.redirect('/view/login')
         })
     } catch (error) {
         console.log(error)
@@ -60,4 +62,23 @@ router.get('/logout', (req,res) => {
 })
 
 
-export {router}
+router.get('/github', passport.authenticate('github', { scope: ['user:email'], session: false }))
+
+router.get('/github/callback', passport.authenticate('github', { scope: ['user:email'], session: false }), (req, res) => {
+    req.session.name = req.user.displayName
+    req.session.passport = true
+    res.redirect('/view/profile')
+})
+
+router.get('/google',
+    passport.authenticate('google', { scope: ['profile'], session: false }));
+
+router.get('/google/callback',
+    passport.authenticate('google', { scope: ['profile'], session: false }),
+    function (req, res) {
+        req.session.name = req.user.displayName
+        req.session.passport = true
+        res.redirect('/view/profile')
+    });
+
+export { router }
